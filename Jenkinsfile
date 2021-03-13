@@ -35,6 +35,13 @@ pipeline {
     }
     }
     
+    stage ('Deploy-To-Tomcat') {
+            steps {
+           sshagent(['tomcat']) {
+                sh 'scp -o StrictHostKeyChecking=no target/*.war kali@192.168.225.192:/prod-tomcat/apache-tomcat-8.5.64/webapps/webapp.war'
+              }      
+           }       
+    }
    
     
   }
